@@ -288,9 +288,15 @@
   lineinfile: regexp="^-Xmx512m" line="-Xmx{{ eclipse_Xmx }}" dest={{eclipse_base_dir}}/eclipse-{{eclipse_major}}/eclipse.ini
   when: eclipse_ini_enabled
 
-- name: eclipse | Configure eclipse icon
+- name: eclipse | Configure eclipse icon (Debian)
   template: src=eclipse.desktop.j2 dest={{ eclipse_owner_home }}/.local/share/applications/eclipse.desktop
   when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu')
+  ignore_errors: yes
+  tags: eclipse_setup
+
+- name: eclipse | Configure eclipse icon (RHEL)
+  template: src=eclipse.desktop.j2 dest=/usr/local/share/applications/eclipse.desktop
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
   ignore_errors: yes
   tags: eclipse_setup
 
