@@ -267,10 +267,11 @@
   command: "{{eclipse_base_dir}}/eclipse-{{eclipse_major}}/eclipse -nosplash \
   -application org.eclipse.equinox.p2.director \
   -destination {{eclipse_base_dir}}/eclipse-{{eclipse_major}} \
-  -repository http://download.eclipse.org/releases/{{eclipse_name}}/,http://download.eclipse.org/technology/m2e/releases/1.5/1.5.0.20140606-0033 \
+  -repository http://download.eclipse.org/releases/{{eclipse_name}}/,http://download.eclipse.org/technology/m2e/releases/1.6/1.6.2.20150902-0002 \
   -installIU org.eclipse.m2e.feature.feature.group,org.eclipse.m2e.logback.feature.feature.group"
   when: eclipse_plugins_m2e_enabled and eclipse_plugins_enabled
   ignore_errors: True
+  failed_when: false
 
 - name:  eclipse | Configure eclipse ini configuration (Launcher XXMaxPermSize)
   lineinfile: regexp="^256m" line="{{ eclipse_launcher_XXMaxPermSize }}" dest={{eclipse_base_dir}}/eclipse-{{eclipse_major}}/eclipse.ini
