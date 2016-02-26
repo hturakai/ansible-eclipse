@@ -273,14 +273,6 @@
   ignore_errors: True
   failed_when: false
 
-- name:  eclipse | Configure eclipse ini configuration (Launcher XXMaxPermSize)
-  lineinfile: regexp="^256m" line="{{ eclipse_launcher_XXMaxPermSize }}" dest={{eclipse_base_dir}}/eclipse-{{eclipse_major}}/eclipse.ini
-  when: eclipse_ini_enabled
-
-- name:  eclipse | Configure eclipse ini configuration (XXMaxPermSize)
-  lineinfile: regexp="^-XX:MaxPermSize=256m" line="-XX:MaxPermSize={{ eclipse_XXMaxPermSize }}" dest={{eclipse_base_dir}}/eclipse-{{eclipse_major}}/eclipse.ini
-  when: eclipse_ini_enabled
-
 - name:  eclipse | Configure eclipse ini configuration (Xms)
   lineinfile: regexp="^-Xms40m" line="-Xms{{ eclipse_XXMaxPermSize }}" dest={{eclipse_base_dir}}/eclipse-{{eclipse_major}}/eclipse.ini
   when: eclipse_ini_enabled
